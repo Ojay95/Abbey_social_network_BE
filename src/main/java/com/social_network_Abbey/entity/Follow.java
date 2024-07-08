@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
+@Table(name = "follows")
 public class Follow {
 
     @Id
@@ -17,9 +18,9 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name = "follower_id", nullable = false)
-    private User follower;
+    private ApplicationUser follower;
 
     @ManyToOne
-    @JoinColumn(name = "followee_id", nullable = false)
-    private User followee;
+    @JoinColumn(name = "following_id", nullable = false)
+    private ApplicationUser following;
 }

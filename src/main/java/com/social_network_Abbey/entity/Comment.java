@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "comments")
 public class Comment {
 
     @Id
@@ -18,14 +19,18 @@ public class Comment {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    private User author;
+    @JoinColumn(name = "user_id", nullable = false)
+    private ApplicationUser user;
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
-    private String content;
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
 }
